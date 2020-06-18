@@ -21,7 +21,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack --watch",
+    "start": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
