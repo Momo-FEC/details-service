@@ -1,26 +1,28 @@
 use phoneDetails;
 
 CREATE TABLE Phones (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
+  name TEXT NOT NULL,
+  productCode TEXT NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE Capacities (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   size TEXT NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE Carriers (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   name TEXT NOT NULL,
   logo TEXT NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE Colors (
-  id INT NOT NULL,
-  name INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
+  name TEXT NOT NULL,
   PRIMARY KEY (id)
 );
 
