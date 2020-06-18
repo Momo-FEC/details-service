@@ -22,7 +22,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --watch",
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "dbBuild": "mysql -u root -p phoneDetails < dbBuild.sql",
+    "dbSeed": "mysql -u root -p phoneDetails < dbSeed.sql",
+    "dbEmpty": "mysql -u root -p phoneDetails < dbEmpty.sql"
   },
   "repository": {
     "type": "git",
