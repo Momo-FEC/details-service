@@ -24,3 +24,6 @@ coverage
 build/
 dist/
 public/
+
+# Database login info
+database/config.js
