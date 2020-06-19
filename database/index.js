@@ -1,14 +1,21 @@
-const dbModels = require('./models.js');
+const { Phone, Capacity, Carrier, Color } = require('./models.js');
 const dbModelOptions = { timestamps: false };
 
 module.exports.getAll = function() {
-  return dbModels.Phone.findAll({
+  return Phone.findAll({
     where: {id: 1},
     attributes: ['name', 'productCode'],
     include: [{
-      model: dbModels.Capacity,
+      model: Capacity,
       attributes: ['size'],
       through: { attributes: [] }
     }]
   });
+};
+
+module.exports.addOne = function({ name, productCode }) {
+  return Promise.all([Phone.create({ name, productCode })])
+    .then((results) => {
+      return results;
+    });
 };
