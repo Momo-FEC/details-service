@@ -1,6 +1,7 @@
 const { Sequelize } = require('sequelize');
 const { username, password } = require('./config.js');
-const sequelize = new Sequelize('phoneDetails', username, password, { dialect: 'mysql'});
+const sequelize = new Sequelize('phoneDetails', username, password, { dialect: 'mysql', logging: false });
+module.exports.sequelize = sequelize;
 
 const dbModelOptions = { timestamps: false };
 

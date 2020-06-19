@@ -28,11 +28,11 @@ module.exports.addOne = function({ name, productCode, carriers, capacities, colo
         return Capacity.findOne({ where: { size: capacity }})
           .then((dbCapacity) => {
             if (dbCapacity) {
-              capacityIds.push(dbCapacity.id);
+              return capacityIds.push(dbCapacity.id);
             } else {
               return Capacity.create({ size: capacity })
                 .then((capacityInsert) => {
-                  capacityIds.push(capacityInsert.id);
+                  return capacityIds.push(capacityInsert.id);
                 });
             }
           });
@@ -44,11 +44,11 @@ module.exports.addOne = function({ name, productCode, carriers, capacities, colo
         return Carrier.findOne({ where: { name: carrier }})
           .then((dbCarrier) => {
             if (dbCarrier) {
-              carrierIds.push(dbCarrier.id);
+              return carrierIds.push(dbCarrier.id);
             } else {
               return Carrier.create({ name: carrier })
                 .then((carrierInsert) => {
-                  carrierIds.push(carrierInsert.id);
+                  return carrierIds.push(carrierInsert.id);
                 });
             }
           });
@@ -60,11 +60,11 @@ module.exports.addOne = function({ name, productCode, carriers, capacities, colo
         return Color.findOne({ where: { name: color }})
           .then((dbColor) => {
             if (dbColor) {
-              colorIds.push(dbColor.id);
+              return colorIds.push(dbColor.id);
             } else {
               return Color.create({ name: color })
                 .then((colorInsert) => {
-                  colorIds.push(colorInsert.id);
+                  return colorIds.push(colorInsert.id);
                 });
             }
           });
@@ -72,15 +72,19 @@ module.exports.addOne = function({ name, productCode, carriers, capacities, colo
     })
     .then(() => {
       // populate join tables
-      console.log(phoneId, capacityIds, carrierIds, colorIds);
-      capacityIds.forEach((capacityId) => {
-        PhonesCapacities.create({ capacityId, phoneId });
-      });
-      carrierIds.forEach((carrierId) => {
-        PhonesCarriers.create({ carrierId, phoneId });
-      });
-      colorIds.forEach((colorId) => {
-        PhonesColors.create({ colorId, phoneId });
-      });
-    });
+      // console.log(phoneId, capacityIds, carrierIds, colorIds);
+      return Promise.all(capacityIds.map((capacityId) => {
+        return PhonesCapacities.create({ capacityId, phoneId });
+      }))
+    })
+    .then(() => {
+      return Promise.all(carrierIds.map((carrierId) => {
+        return PhonesCarriers.create({ carrierId, phoneId });
+      }))
+    })
+    .then(() => {
+      return Promise.all(colorIds.map((colorId) => {
+        return PhonesColors.create({ colorId, phoneId });
+      }))
+    })
 };
