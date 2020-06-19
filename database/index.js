@@ -1,13 +1,14 @@
-var mysql = require('mysql');
+const dbModels = require('./models.js');
+const dbModelOptions = { timestamps: false };
 
-var connection = mysql.createConnection(require('./config.js'));
-
-module.exports.getAll = function (callback) {
-  connection.query('SELECT * FROM Phones', (err, results) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(null, results);
-    }
+module.exports.getAll = function() {
+  return dbModels.Phone.findAll({
+    where: {id: 1},
+    attributes: ['name', 'productCode'],
+    include: [{
+      model: dbModels.Capacity,
+      attributes: ['size'],
+      through: { attributes: [] }
+    }]
   });
 };
