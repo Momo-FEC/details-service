@@ -62,6 +62,7 @@ module.exports.seed = function() {
       });
   }
 };
+
 module.exports.addOne = function({ name, productCode, carriers, capacities, colors }) {
   var phoneId;
   var capacityIds = [];
