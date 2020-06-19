@@ -5,8 +5,8 @@ const db = require('../database/index.js');
 
 app.use(express.static('public'));
 
-app.get('/phones', (req, res) => {
-  db.getAll()
+app.get('/phones/:id', (req, res) => {
+  db.getOne(req.params.id)
     .then((results) => {
       res.end(JSON.stringify(results));
     });
