@@ -1,9 +1,9 @@
 use phoneDetails;
 
-DROP TABLE Phones_Capacities;
-DROP TABLE Phones_Carriers;
-DROP TABLE Phones_Colors;
-DROP TABLE Capacities;
-DROP TABLE Carriers;
-DROP TABLE Colors;
-DROP TABLE Phones;
+DROP TABLE phones_capacities;
+DROP TABLE phones_carriers;
+DROP TABLE phones_colors;
+DROP TABLE capacities;
+DROP TABLE carriers;
+DROP TABLE colors;
+DROP TABLE phones;
