@@ -9,6 +9,14 @@ module.exports.getOne = function(id) {
       model: Capacity,
       attributes: ['size'],
       through: { attributes: [] }
+    }, {
+      model: Carrier,
+      attributes: ['name'],
+      through: { attributes: [] }
+    }, {
+      model: Color,
+      attributes: ['name'],
+      through: { attributes: [] }
     }]
   });
 };
@@ -72,7 +80,6 @@ module.exports.addOne = function({ name, productCode, carriers, capacities, colo
     })
     .then(() => {
       // populate join tables
-      // console.log(phoneId, capacityIds, carrierIds, colorIds);
       return Promise.all(capacityIds.map((capacityId) => {
         return PhonesCapacities.create({ capacityId, phoneId });
       }));
