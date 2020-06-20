@@ -15,7 +15,6 @@ var Phone = sequelize.define('phone', {
     allowNull: false
   }
 }, dbModelOptions);
-Phone.sync();
 module.exports.Phone = Phone;
 
 var Capacity = sequelize.define('capacity', {
@@ -25,7 +24,6 @@ var Capacity = sequelize.define('capacity', {
     unique: true
   }
 }, dbModelOptions);
-Capacity.sync();
 module.exports.Capacity = Capacity;
 
 var Carrier = sequelize.define('carrier', {
@@ -38,7 +36,6 @@ var Carrier = sequelize.define('carrier', {
     type: 'TEXT'
   }
 }, dbModelOptions);
-Carrier.sync();
 module.exports.Carrier = Carrier;
 
 var Color = sequelize.define('color', {
@@ -48,23 +45,19 @@ var Color = sequelize.define('color', {
     unique: true
   }
 }, dbModelOptions);
-Color.sync();
 module.exports.Color = Color;
 
 var PhonesCapacities = sequelize.define('phones_capacities', {}, dbModelOptions);
 Phone.belongsToMany(Capacity, { through: PhonesCapacities });
 Capacity.belongsToMany(Phone, { through: PhonesCapacities });
-PhonesCapacities.sync();
 module.exports.PhonesCapacities = PhonesCapacities;
 
 var PhonesCarriers = sequelize.define('phones_carriers', {}, dbModelOptions);
 Phone.belongsToMany(Carrier, { through: PhonesCarriers });
 Carrier.belongsToMany(Phone, { through: PhonesCarriers });
-PhonesCarriers.sync();
 module.exports.PhonesCarriers = PhonesCarriers;
 
 var PhonesColors = sequelize.define('phones_colors', {}, dbModelOptions);
 Phone.belongsToMany(Color, { through: PhonesColors });
 Color.belongsToMany(Phone, { through: PhonesColors });
-PhonesColors.sync();
 module.exports.PhonesColors = PhonesColors;
