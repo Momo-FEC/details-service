@@ -26,7 +26,8 @@
     "test": "jest",
     "build": "webpack --watch",
     "start": "nodemon server/index.js",
-    "dbEmpty": "mysql -u root -p phoneDetails < dbEmpty.sql"
+    "dbBuild": "node database/build.js",
+    "dbSeed": "node database/seed.js"
   },
   "repository": {
     "type": "git",

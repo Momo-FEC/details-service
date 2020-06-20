@@ -75,16 +75,16 @@ module.exports.addOne = function({ name, productCode, carriers, capacities, colo
       // console.log(phoneId, capacityIds, carrierIds, colorIds);
       return Promise.all(capacityIds.map((capacityId) => {
         return PhonesCapacities.create({ capacityId, phoneId });
-      }))
+      }));
     })
     .then(() => {
       return Promise.all(carrierIds.map((carrierId) => {
         return PhonesCarriers.create({ carrierId, phoneId });
-      }))
+      }));
     })
     .then(() => {
       return Promise.all(colorIds.map((colorId) => {
         return PhonesColors.create({ colorId, phoneId });
-      }))
-    })
+      }));
+    });
 };
