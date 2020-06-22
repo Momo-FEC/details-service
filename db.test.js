@@ -54,7 +54,7 @@ it('should add 100 more phone records after seed', () => {
         Color.findAll()]);
     })
     .then(([phones, capacities, carriers, colors]) => {
-      expect(phones.length).toBe(100);
+      expect(phones.length).toBe(50);
       expect(capacities.length).toBeLessThan(10);
       expect(carriers.length).toBeLessThan(10);
       expect(colors.length).toBeLessThan(10);
@@ -77,7 +77,7 @@ it('should retrieve data for a given ID', () => {
     .then((response) => {
       expect(typeof(response.data[0])).toBe('object');
       expect(response.data[0].name).toBe('string');
-      expect(response.data[0].capacities.length).toBe(2);
+      expect(response.data[0].capacities.length).toBe(3);
     })
     .catch((err) => {
       expect(err).toBe('undefined');
