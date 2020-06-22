@@ -48,4 +48,4 @@ var seed = function() {
   return add();
 };
 
-seed();
+module.exports = seed;
