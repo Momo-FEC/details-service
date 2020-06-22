@@ -4,8 +4,8 @@ jobs:
     executor:
       name: node/default
     docker:
-      - image: circleci/node: latest
-      - image: circleci/mysql: latest
+      - image: circleci/node:latest
+      - image: circleci/mysql:latest
         environment:
           MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
           MYSQL_DATABASE: phoneDetails
