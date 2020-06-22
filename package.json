@@ -28,7 +28,7 @@
     "build": "webpack --watch",
     "start": "nodemon server/index.js",
     "dbBuild": "node database/build.js",
-    "dbSeed": "node database/seed.js"
+    "dbSeed": "node -e \"require('./database/seed.js')()\""
   },
   "repository": {
     "type": "git",

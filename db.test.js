@@ -11,7 +11,11 @@ require('mysql2/node_modules/iconv-lite').encodingExists('foo');
 
 // // resets the database (tears down and rebuilds)
 beforeEach(() => {
-  return require('./database/build.js');
+  return sequelize.sync({ force: true });
+})
+
+afterAll(() => {
+  return sequelize.close();
 })
 
 it('should add data to all tables for first record added', () => {
@@ -40,21 +44,23 @@ it('should add data to all tables for first record added', () => {
   });
 });
 
-// test('should add 100 more phone records after seed', async () => {
-//   await require('./database/seed.js')
-//   expect.assertions(4);
-//   return Promise.all([Phone.findAll(),
-//         Capacity.findAll(),
-//         Carrier.findAll(),
-//         Color.findAll()])
-//     .then(([phones, capacities, carriers, colors]) => {
-//       expect(phones.length).toBe(101);
-//       expect(capacities.length).toBeLessThan(10);
-//       expect(carriers.length).toBeLessThan(10);
-//       expect(colors.length).toBeLessThan(10);
-//     })
-//     .catch(() => {})
-// })
+test('should add 100 more phone records after seed', () => {
+  expect.assertions(4);
+  return require('./database/seed.js')()
+    .then(() => {
+      return Promise.all([Phone.findAll(),
+            Capacity.findAll(),
+            Carrier.findAll(),
+            Color.findAll()])
+    })
+    .then(([phones, capacities, carriers, colors]) => {
+      expect(phones.length).toBe(100);
+      expect(capacities.length).toBeLessThan(10);
+      expect(carriers.length).toBeLessThan(10);
+      expect(colors.length).toBeLessThan(10);
+    })
+    .catch(() => {})
+})
 
 it('should retrieve data for a given ID', () => {
   expect.assertions(1);
@@ -66,10 +72,9 @@ it('should retrieve data for a given ID', () => {
     colors: ['red', 'blue', 'green']
   })
     .then(() => {
-      axios.get('http://localhost:3002/phones/1', { adapter })
+      return axios.get('http://localhost:3002/phones/1', { adapter })
     })
     .then((response) => {
-      console.log(response.data);
       expect(typeof(response.data)).toBe('object');
     })
     .catch((err) => {
