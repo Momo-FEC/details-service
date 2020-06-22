@@ -21,8 +21,11 @@ jobs:
                 environment:
                   MYSQL_PASSWORD: $MYSQL_PASSWORD
                 background: true
-            - run: sleep 10
-            - run: npm test
+            - run: sleep 5
+            - run:
+                command: npm test
+                environment:
+                  MYSQL_PASSWORD: $MYSQL_PASSWORD
 workflows:
     build-and-test:
       jobs:
