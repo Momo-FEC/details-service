@@ -19,7 +19,7 @@ afterAll(() => {
 })
 
 it('should add data to all tables for first record added', () => {
-  // expect.assertions(4);
+  expect.assertions(4);
   return db.addOne({
     name: 'string',
     productCode: 'also string',
@@ -63,7 +63,7 @@ test('should add 100 more phone records after seed', () => {
 })
 
 it('should retrieve data for a given ID', () => {
-  expect.assertions(1);
+  expect.assertions(3);
   return db.addOne({
     name: 'string',
     productCode: 'also string',
@@ -75,7 +75,9 @@ it('should retrieve data for a given ID', () => {
       return axios.get('http://localhost:3002/phones/1', { adapter })
     })
     .then((response) => {
-      expect(typeof(response.data)).toBe('object');
+      expect(typeof(response.data[0])).toBe('object');
+      expect(response.data[0].name).toBe('string');
+      expect(response.data[0].capacities.length).toBe(2);
     })
     .catch((err) => {
       expect(err).toBe('undefined');
