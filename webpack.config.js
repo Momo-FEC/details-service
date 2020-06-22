@@ -12,7 +12,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: [
-          path.resolve(__dirname, "client")
+          path.resolve(__dirname, 'client')
         ],
         use: {
           loader: 'babel-loader',
@@ -23,4 +23,4 @@ module.exports = {
       }
     ]
   }
-}
+};
