@@ -16,7 +16,10 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
-            - run: npm run start
+            - run:
+                command: npm run start
+                environment:
+                  MYSQL_PASSWORD: $MYSQL_PASSWORD
             - run: npm test
 workflows:
     build-and-test:
