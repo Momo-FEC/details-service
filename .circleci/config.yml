@@ -1,0 +1,32 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  build-and-test:
+    executor:
+      name: node/default
+    docker:
+      - image: circleci/node:latest
+      - image: circleci/mysql:latest
+        environment:
+          MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
+          MYSQL_DATABASE: phoneDetails
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run:
+                command: npm run start
+                environment:
+                  MYSQL_PASSWORD: $MYSQL_PASSWORD
+                background: true
+            - run: sleep 5
+            - run:
+                command: npm test
+                environment:
+                  MYSQL_PASSWORD: $MYSQL_PASSWORD
+workflows:
+    build-and-test:
+      jobs:
+        - build-and-test
