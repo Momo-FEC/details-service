@@ -1,21 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+import styled from 'styled-components';
+import TopDetails from './TopDetails.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.className = props.className;
     this.state = {
+      phone: {
+        name: 'default phone name',
+        productCode: 'product code',
+        capacities: [{ size: 'size1' }, { size: 'size2' }],
+        carriers: [{ name: 'Verizon' }, { name: 'Sprint' }],
+        colors: [{ name: 'Blue' }, { name: 'Red' }]
+      }
+    };
+  }
 
-    }
+  componentDidMount() {
+    axios.get('http://localhost:3002/phones/9')
+      .then((response) => {
+        this.setState({ phone: response.data[0] });
+      });
   }
 
   render() {
+    var { name, productCode } = this.state.phone;
     return (
-      <div>Hey there</div>
-    )
+      <div id='MainDetails' className={this.className}>
+        <TopDetails productCode={productCode} name={name} />
+      </div>
+    );
   }
 }
 
-ReactDOM.render(React.createElement(App), document.getElementById('detailsMain'))
+var StyledApp = styled(App)`
+  display: block;
+  padding: 1px 4% 0;
+  margin-top: 6%;
+  border: 1px solid green;
+  position: relative;
+  vertical-align: baseline;
+`;
 
+ReactDOM.render(React.createElement(StyledApp), document.getElementById('detailsMain'));
 export default App;
