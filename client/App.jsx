@@ -40,7 +40,6 @@ var StyledApp = styled(App)`
   display: block;
   padding: 1px 4% 0;
   margin-top: 6%;
-  border: 1px solid green;
   position: relative;
   vertical-align: baseline;
 `;
