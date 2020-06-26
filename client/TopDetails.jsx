@@ -64,5 +64,4 @@ var TopDetails = (props) => {
 export default styled(TopDetails)`
   margin: 0;
   padding: 0;
-  width: 40%;
 `;
