@@ -8,29 +8,26 @@ import Selectors from './Selectors.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.className = props.className;
     this.state = {
-      phone: {
-        name: 'default phone name',
-        productCode: 'product code',
-        capacities: [{ size: 'size1' }, { size: 'size2' }],
-        carriers: [{ name: 'Verizon' }, { name: 'Sprint' }],
-        colors: [{ name: 'Blue' }, { name: 'Red' }]
-      }
+      phone: null
     };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3002/phones/9')
+    axios.get(`http://127.0.0.1:3002/phones${window.location.pathname}`)
       .then((response) => {
         this.setState({ phone: response.data[0] });
       });
   }
 
   render() {
+    if (this.state.phone === null) {
+      return <div>There was an error retrieving the phone information.</div>;
+    }
+    var { className } = this.props;
     var { name, productCode, capacities, carriers, colors } = this.state.phone;
     return (
-      <div id='MainDetails' className={this.className}>
+      <div id='MainDetails' className={className}>
         <TopDetails productCode={productCode} name={name} />
         <Selectors capacities={capacities} carriers={carriers} colors={colors} />
       </div>
@@ -39,12 +36,9 @@ class App extends React.Component {
 }
 
 var StyledApp = styled(App)`
-  display: block;
   padding: 1px 4% 0;
   margin-top: 6%;
-  position: relative;
-  vertical-align: baseline;
+  font-family: Arial;
 `;
 
 ReactDOM.render(React.createElement(StyledApp), document.getElementById('detailsMain'));
-export default App;
