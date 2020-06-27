@@ -4,6 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import TopDetails from './TopDetails.jsx';
 import Selectors from './Selectors.jsx';
+import BottomDetails from './BottomDetails.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class App extends React.Component {
       <div id='MainDetails' className={this.className}>
         <TopDetails productCode={productCode} name={name} />
         <Selectors capacities={capacities} carriers={carriers} colors={colors} />
+        <BottomDetails />
       </div>
     );
   }
