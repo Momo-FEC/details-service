@@ -3,13 +3,11 @@ import styled from 'styled-components';
 
 var Name = styled.div`
   display: inline-block;
-  margin: 0;
   line-height: 160%;
-  font-family: 'Arial';
+  max-width: calc(100% - 80px);
   font-size: 20px;
   font-weight: 700;
   color: #363636;
-  max-width: calc(100% - 80px);
 `;
 
 var Wishlist = styled.div`
@@ -18,33 +16,27 @@ var Wishlist = styled.div`
   line-height: 32px;
   float: right;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   color: #1428a0;
 `;
 
 var ProductCode = styled.div`
-  font-family: 'Arial';
-  font-size: 10px;
   line-height: 240%;
-  font-weight: 700;
   margin-right: 15px;
+  font-size: 10px;
+  font-weight: 700;
   color: #a6a6a6;
 `;
 
 var Ratings = styled.div`
   display: inline-block;
-  font-size: medium;
-  line-height: 1;
-  text-align: start;
-  color: black;
 `;
 
 var Share = styled.div`
   cursor: pointer;
   display: inline-block;
-  color #0077C8;
   font-size: 12px;
-  vertical-align: 5px;
+  color #0077C8;
 `;
 
 var TopDetails = (props) => {
