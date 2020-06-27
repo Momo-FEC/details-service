@@ -34,14 +34,14 @@ var Price = styled((props) => {
   }
   return null;
 })`
-  font-size: 14px;
-  font-weight: bold;
   margin-left: 10px;
-  color: #000;
   float: right;
   right: 15px;
   line-height: 1em;
   text-align: right;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
 `;
 
 var SelectorItem = (props) => {
@@ -63,13 +63,13 @@ export default styled(SelectorItem)`
       return 'calc(50% - 10px)';
     }
   }};
+  display: flex;
   border: 1px solid #a6a6a6;
   border-radius: 4px;
   margin-left: 4px;
   margin-right: 4px;
   margin-bottom: 10px;
   padding: 15px 0px;
-  display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
