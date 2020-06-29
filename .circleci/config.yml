@@ -9,7 +9,6 @@ jobs:
       - image: circleci/node:latest
       - image: circleci/mysql:latest
         environment:
-          MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
           MYSQL_DATABASE: phoneDetails
     steps:
       - checkout
@@ -18,14 +17,9 @@ jobs:
             - run: npm install
             - run:
                 command: npm run start
-                environment:
-                  MYSQL_PASSWORD: $MYSQL_PASSWORD
                 background: true
             - run: sleep 5
-            - run:
-                command: npm test
-                environment:
-                  MYSQL_PASSWORD: $MYSQL_PASSWORD
+            - run: npm run test
 workflows:
     build-and-test:
       jobs:
