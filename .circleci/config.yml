@@ -20,7 +20,10 @@ jobs:
                 command: npm run start
                 background: true
             - run: sleep 5
-            - run: npm run test
+            - run:
+                command: npm test
+                environment:
+                  MYSQL_PASSWORD: $MYSQL_PASSWORD
 workflows:
     build-and-test:
       jobs:
