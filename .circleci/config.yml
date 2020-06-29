@@ -11,8 +11,6 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
           MYSQL_DATABASE: phoneDetails
-          MYSQL_USER: $MYSQL_USER
-          MYSQL_PASSWORD: $MYSQL_PASSWORD
     steps:
       - checkout
       - node/with-cache:
