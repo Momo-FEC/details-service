@@ -3,6 +3,9 @@ const app = express();
 const port = 3002;
 const db = require('../database/index.js');
 
+app.get('/', (req, res) => {
+  res.redirect('/1');
+});
 app.use('/:id', express.static('public'));
 
 app.get('/phones/:id', (req, res) => {
