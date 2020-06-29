@@ -9,6 +9,8 @@ jobs:
       - image: circleci/node:latest
       - image: circleci/mysql:latest
         environment:
+          MYSQL_USER: $MYSQL_USERNAME
+          MYSQL_PASSWORD: $MYSQL_PASSWORD
           MYSQL_DATABASE: phoneDetails
     steps:
       - checkout
