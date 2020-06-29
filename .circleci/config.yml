@@ -18,6 +18,8 @@ jobs:
             - run: npm install
             - run:
                 command: npm run start
+                environment:
+                  MYSQL_PASSWORD: $MYSQL_PASSWORD
                 background: true
             - run: sleep 5
             - run:
