@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('phoneDetails', process.env.MYSQL_USERNAME || require('./config.js').username, process.env.MYSQL_PASSWORD || require('./config.js').password, { dialect: 'mysql', logging: false });
+console.log(process.env);
+const sequelize = new Sequelize('phoneDetails', process.env.MYSQL_USER || require('./config.js').username, process.env.MYSQL_PASSWORD || require('./config.js').password, { dialect: 'mysql', logging: false });
 module.exports.sequelize = sequelize;
 
 const dbModelOptions = { timestamps: false };
