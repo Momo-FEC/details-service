@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.phone === null) {
+    if (!this.state.phone) {
       return <div>There was an error retrieving the phone information.</div>;
     }
     var { className } = this.props;

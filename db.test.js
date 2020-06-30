@@ -72,7 +72,7 @@ it('should retrieve data for a given ID', () => {
     colors: ['red', 'blue', 'green']
   })
     .then(() => {
-      return axios.get('http://localhost:3002/phones/1', { adapter });
+      return axios.get('http://127.0.0.1:3002/phones/1', { adapter });
     })
     .then((response) => {
       expect(typeof(response.data[0])).toBe('object');
