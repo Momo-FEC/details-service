@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Ratings from './Ratings.jsx';
 
 var Name = styled.div`
   display: inline-block;
@@ -28,10 +29,6 @@ var ProductCode = styled.div`
   color: #a6a6a6;
 `;
 
-var Ratings = styled.div`
-  display: inline-block;
-`;
-
 var Share = styled.div`
   cursor: pointer;
   display: inline-block;
@@ -46,7 +43,7 @@ var TopDetails = (props) => {
       <Wishlist><img src='https://image-us.samsung.com/SamsungUS/home/store-locator/icon_wishlist_default.svg'></img> Wishlist</Wishlist>
       <div style={{display: 'flex'}}>
         <ProductCode>{props.productCode}</ProductCode>
-        <Ratings>rating summary goes here </Ratings>
+        <Ratings />
         <Share> Share your product experience</Share>
       </div>
     </div>
