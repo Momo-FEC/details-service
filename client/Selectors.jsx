@@ -16,29 +16,63 @@ var Selector = styled.div`
   flex-wrap: wrap;
 `;
 
-var Selectors = (props) => {
-  return (
-    <div id='Selectors' className={props.className}>
-      <Title>CARRIER</Title>
-      <Selector>
-        {props.carriers.map((carrier) => {
-          return <SelectorItem key={carrier.name} name={carrier.name} section='carrier'/>;
-        })}
-      </Selector>
-      <Title>CAPACITY</Title>
-      <Selector>
-        {props.capacities.map((capacity) => {
-          return <SelectorItem key={capacity.size} name={capacity.size} section='capacity'/>;
-        })}
-      </Selector>
-      <Title>COLOR</Title>
-      <Selector>
-        {props.colors.map((color) => {
-          return <SelectorItem key={color.name} name={color.name} section='color'/>;
-        })}
-      </Selector>
-    </div>
-  );
-};
+class Selectors extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      carrier: props.carriers[0].name,
+      capacity: props.capacities[0].size,
+      color: props.colors[0].name
+    };
+  }
+
+  handleSelect(section, name) {
+    var temp = {};
+    temp[section] = name;
+    this.setState(temp);
+  }
+
+  render() {
+    var { className, carriers, capacities, colors } = this.props;
+
+    return (
+      <div id='Selectors' className={className}>
+        <Title>CARRIER</Title>
+        <Selector>
+          {carriers.map((carrier, index) => {
+            return <SelectorItem
+              key={index}
+              name={carrier.name}
+              section='carrier'
+              handleSelect={this.handleSelect.bind(this)}
+              selected={carrier.name === this.state.carrier}/>;
+          })}
+        </Selector>
+        <Title>CAPACITY</Title>
+        <Selector>
+          {capacities.map((capacity, index) => {
+            return <SelectorItem
+              key={index}
+              name={capacity.size}
+              section='capacity'
+              handleSelect={this.handleSelect.bind(this)}
+              selected={capacity.size === this.state.capacity}/>;
+          })}
+        </Selector>
+        <Title>COLOR</Title>
+        <Selector>
+          {colors.map((color, index) => {
+            return <SelectorItem
+              key={index}
+              name={color.name}
+              section='color'
+              handleSelect={this.handleSelect.bind(this)}
+              selected={color.name === this.state.color}/>;
+          })}
+        </Selector>
+      </div>
+    );
+  }
+}
 
 export default Selectors;

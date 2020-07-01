@@ -44,11 +44,11 @@ var Price = styled((props) => {
   color: #000;
 `;
 
-var SelectorItem = (props) => {
+var SelectorItem = ({ className, name, section, handleSelect }) => {
   return (
-    <div className={props.className}>
-      <Image name={props.name} />
-      <Price section={props.section} name={props.name} />
+    <div className={className} onClick={() => handleSelect(section, name)}>
+      <Image name={name} />
+      <Price section={section} name={name} />
     </div>
   );
 };
@@ -64,12 +64,13 @@ export default styled(SelectorItem)`
     }
   }};
   display: flex;
-  border: 1px solid #a6a6a6;
+  border: ${(props) => {
+    return (props.selected) ? '2px solid #1428a0' : '1px solid #a6a6a6';
+  }};
   border-radius: 4px;
-  margin-left: 4px;
-  margin-right: 4px;
-  margin-bottom: 10px;
-  padding: 15px 0px;
+  margin: 0 5px 10px 5px;
+  padding: 15px 1%;
+  box-sizing: border-box;
   align-items: center;
   justify-content: center;
   overflow: hidden;
