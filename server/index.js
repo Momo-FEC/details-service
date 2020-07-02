@@ -4,7 +4,9 @@ const port = 3002;
 const db = require('../database/index.js');
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:3000');
+  if (req.headers.host.indexOf('127.0.0.1') === 0) {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+  }
   next();
 });
 
