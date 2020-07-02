@@ -5,10 +5,11 @@ var Star = styled(({ className }) => {
   return (<span className={className}>★</span>);
 })`
   color: ${props => props.fill ? '#FECE30' : '#CACACA'};
+  font-size: 21px;
 `;
 
-var Average = styled(({ className }) => {
-  return (<span className={className}>2.9 (23)</span>);
+var Average = styled(({ className, average, total }) => {
+  return (<span className={className}>{average} ({total})</span>);
 })`
   align-items: center;
   vertical-align: middle;
@@ -18,9 +19,7 @@ var Average = styled(({ className }) => {
 
 var Bar = styled.div`
   display: inline-block;
-  position: relative;
-  top: 2px;
-  height: 12px;
+  height: 10px;
   width: ${props => props.width};
   background-color: ${props => props.fill ? '#FECE30' : '#CACACA'};
   border-radius: ${props => props.fill ? '4px 0 0 4px' : '0 4px 4px 0'};
@@ -32,14 +31,15 @@ var Line = styled(({ className, index, count, total }) => {
     <div className={className}>
       {index}
       <Star fill={true} />
-      <Bar fill={true} width={(count / total * 60).toString() + '%'}/>
-      <Bar fill={false} width={((total - count) / total * 60).toString() + '%'}/>
+      <Bar fill={true} width={(count / total * 80).toString() + '%'}/>
+      <Bar fill={false} width={((total - count) / total * 80).toString() + '%'}/>
       {count}
     </div>
   );
 })`
   height: 25px;
-  font-size: 13px;
+  display: flex;
+  align-items: center;
 `;
 
 var ReadReviews = styled(({ className, total }) => {
@@ -47,12 +47,16 @@ var ReadReviews = styled(({ className, total }) => {
     <button className={className}>READ {total} REVIEWS</button>
   );
 })`
-  color: red;
+  color: #FFFFFF;
+  font-weight: 700;
+  background-color: #0077C8;
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
 `;
 
-var Popup = styled(({ className }) => {
-  var ratings = [2, 3, 4, 4, 2];
-  var total = ratings.reduce((x, y) => x + y);
+var Popup = styled(({ className, ratings, total }) => {
   return (
     <div className={className}>
       {ratings.map((rating, index) => {
@@ -67,10 +71,11 @@ var Popup = styled(({ className }) => {
   position: absolute;
   visibility: ${props => props.visible ? 'visible' : 'hidden'};
   top: 40px;
-  width: 270px;
-  padding: 5%;
+  width: 200px;
+  padding: 20%;
   border: 1px solid black;
   color: black;
+  font-size: 13px;
   text-align: center;
   background-color: white;
 `;
@@ -89,14 +94,17 @@ class Ratings extends React.Component {
 
   render() {
     var { className } = this.props;
+    var ratings = [2, 3, 4, 24, 2];
+    var total = ratings.reduce((x, y) => x + y);
+    var average = Math.round(ratings.reduce((x, y, i) => x + y * (5 - i)) / total * 10) / 10;
     return (
       <div className={className}
         onMouseEnter={this.handleHover.bind(this)}
         onMouseLeave={this.handleHover.bind(this)}>
         <Star fill={true} /><Star fill={true} /><Star fill={true} />
         <Star fill={false} /><Star fill={false} />
-        <Average />
-        <Popup visible={this.state.hover} />
+        <Average average={average} total={total}/>
+        <Popup visible={this.state.hover} ratings={ratings} total={total}/>
       </div>
     );
   }
