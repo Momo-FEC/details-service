@@ -44,16 +44,7 @@ var Price = styled((props) => {
   color: #000;
 `;
 
-var SelectorItem = ({ className, name, section, handleSelect }) => {
-  return (
-    <div className={className} onClick={() => handleSelect(section, name)}>
-      <Image name={name} />
-      <Price section={section} name={name} />
-    </div>
-  );
-};
-
-export default styled(SelectorItem)`
+var StyledItem = styled.div`
   width: ${props => {
     if (props.name === 'Unlocked') {
       return 'calc(100% - 10px)';
@@ -65,7 +56,7 @@ export default styled(SelectorItem)`
   }};
   display: flex;
   border: ${(props) => {
-    return (props.selected) ? '2px solid #1428a0' : '1px solid #a6a6a6';
+    return (props.selected || props.hovered) ? '2px solid #1428a0' : '1px solid #a6a6a6';
   }};
   border-radius: 4px;
   margin: 0 5px 10px 5px;
@@ -76,3 +67,35 @@ export default styled(SelectorItem)`
   overflow: hidden;
   cursor: pointer;
 `;
+
+class SelectorItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hovered: false
+    };
+  }
+
+  handleHover() {
+    this.setState({hovered: !this.state.hovered});
+  }
+
+  render() {
+    var { className, name, section, selected, handleSelect } = this.props;
+    return (
+      <StyledItem
+        hovered={this.state.hovered}
+        name={name}
+        section={section}
+        selected={selected}
+        onClick={() => handleSelect(section, name)}
+        onMouseEnter={this.handleHover.bind(this)}
+        onMouseLeave={this.handleHover.bind(this)}>
+        <Image name={name} />
+        <Price section={section} name={name} />
+      </StyledItem>
+    );
+  }
+}
+
+export default SelectorItem;
