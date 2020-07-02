@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 var Star = styled(({ className }) => {
   return (<span className={className}>★</span>);
@@ -84,7 +85,8 @@ class Ratings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
+      hover: false,
+      ratings: [2, 3, 4, 24, 2]
     };
   }
 
@@ -92,9 +94,20 @@ class Ratings extends React.Component {
     this.setState({hover: !this.state.hover});
   }
 
+  componentDidMount() {
+    axios.get(`http://127.0.0.1:3006/api/reviews${window.location.pathname}`)
+      .then((response) => {
+        var ratings = [0, 0, 0, 0, 0];
+        response.data.forEach((review) => {
+          ratings[5 - review.overall] += 1;
+        });
+        this.setState({ratings: ratings});
+      });
+  }
+
   render() {
+    var { hover, ratings } = this.state;
     var { className } = this.props;
-    var ratings = [2, 3, 4, 24, 2];
     var total = ratings.reduce((x, y) => x + y);
     var average = Math.round(ratings.reduce((x, y, i) => x + y * (5 - i)) / total * 10) / 10;
     return (
@@ -104,7 +117,7 @@ class Ratings extends React.Component {
         <Star fill={true} /><Star fill={true} /><Star fill={true} />
         <Star fill={false} /><Star fill={false} />
         <Average average={average} total={total}/>
-        <Popup visible={this.state.hover} ratings={ratings} total={total}/>
+        <Popup visible={hover} ratings={ratings} total={total}/>
       </div>
     );
   }
